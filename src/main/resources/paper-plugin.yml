@@ -1,0 +1,5 @@
+name: ScreenShaker
+version: '0.1'
+main: me.ybbbno.screenshaker.ScreenShaker
+api-version: '1.21'
+authors: [ ybbbno ]
