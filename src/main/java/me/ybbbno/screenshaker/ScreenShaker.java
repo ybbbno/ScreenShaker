@@ -21,6 +21,8 @@ public final class ScreenShaker extends PluginProvider {
     @Override
     public void onDisable() {
         manager.deinit();
+
+        ScreenShakerAPI.invalidate();
     }
 
     public ScreenShakerManager getManager() {
