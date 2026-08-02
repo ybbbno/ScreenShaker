@@ -1,17 +1,29 @@
 package me.ybbbno.screenshaker;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import me.deadybbb.ybmj.PluginProvider;
 
-public final class ScreenShaker extends JavaPlugin {
+public final class ScreenShaker extends PluginProvider {
+
+    private ScreenShakerManager manager;
+
+    @Override
+    public void onLoad() {
+        manager = new ScreenShakerManager(this);
+    }
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
+        manager.init();
 
+        registerCommand("shake", new ScreenShakerCommand(manager));
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        manager.deinit();
+    }
+
+    public ScreenShakerManager getManager() {
+        return manager;
     }
 }

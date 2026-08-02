@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id("xyz.jpenilla.run-paper") version "2.3.1"
+    id "com.gradleup.shadow" version "9.4.1"
 }
 
 group = 'me.ybbbno'
@@ -15,16 +15,18 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.10-R0.1-SNAPSHOT")
+    compileOnly "io.papermc.paper:paper-api:1.21.10-R0.1-SNAPSHOT"
+    implementation files("libs/YBMJ-0.1.5.jar")
 }
 
-tasks {
-    runServer {
-        // Configure the Minecraft version for our task.
-        // This is the only required configuration besides applying the plugin.
-        // Your plugin's jar (or shadowJar if present) will be used automatically.
-        minecraftVersion("1.21")
-    }
+shadowJar {
+    archiveClassifier.set('')
+
+    exclude 'me/deadybbb/ybmj/paper-plugin.yml'
+
+    relocate 'me.deadybbb', "${project.group}"
+
+    minimize()
 }
 
 def targetJavaVersion = 21
